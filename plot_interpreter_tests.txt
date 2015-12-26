@@ -1,0 +1,132 @@
+// TEST: LOOP AROUND THE PLOTTABLE SURFACE
+//plot_interpreter.ino
+
+#include <grid.h>
+
+Grid grid;
+long origin[2];
+long pos[2];
+void setup() {
+    origin[0] = 0;
+    origin[1] = 0;
+
+    pos[0] = 13;
+    pos[1] = 13;
+}
+
+void loop() {
+    pos[0] = 0;
+    pos[1] = 13;
+
+    grid.moveToPixels(pos);
+    delay(500);
+
+    pos[0] = 13;
+    pos[1] = 13;
+
+    grid.moveToPixels(pos);
+    delay(500);
+
+    pos[0] = 13;
+    pos[1] = 0;
+
+    grid.moveToPixels(pos);
+    delay(500);
+
+    pos[0] = 0;
+    pos[1] = 0;
+
+    grid.moveToPixels(origin);
+    delay(500);
+}
+
+//**************************************************
+
+//TEST: print hello (hardcoded)
+//plot_interpreter.ino
+
+#include <Servo.h>
+
+#include <grid.h>
+
+Servo myservo;
+
+Grid grid;
+
+void setup(){
+}
+
+void loop(){
+    //h
+    go(0, 26);
+    go(0, 13);
+    go(4, 13);
+    go(4, 0);
+    go(4, 26);
+    go(6, 26);
+
+    //e
+    go(6, 0);
+    go(9, 0);
+    go(6, 0);
+    go(6, 13);
+    go(9, 13);
+    go(6, 13);
+    go(6, 26);
+    go(11, 26);
+
+    //l's
+    go(11, 0);
+    go(11, 26);
+    go(16, 26);
+
+    go(16, 0);
+    go(16, 26);
+    go(21, 26);
+
+    //o
+    go(21, 0);
+    go(25, 0);
+    go(25, 26);
+    go(21, 26);
+
+    delay(2000);
+
+    go(0, 0);
+
+    delay(10000);
+
+}
+
+void go(long x, long y){
+    long pos[2];
+    pos[0] = x;
+    pos[1] = y;
+    grid.moveToPixels(pos);
+}
+
+//**************************************************
+
+//TEST: the servo can move up and down
+
+//plot_interpreter.ino
+
+#include "Arduino.h"
+#include <Servo.h>
+
+Servo servo;
+int servoPin = 3;
+
+void setup(){
+  servo.attach(servoPin);
+}
+
+void loop(){
+  servo.write(0);
+  delay(50);
+  delay(1000);
+
+  servo.write(90);
+  delay(50);
+  delay(5000);
+}
