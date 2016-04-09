@@ -12,7 +12,7 @@
 
 class Pen{
 public:
-  Pen(int up_angle=90, int down_angle=0):
+  Pen(int up_angle=45, int down_angle=0):
     up_angle(up_angle),
     down_angle(down_angle){};
   void up();
