@@ -15,6 +15,7 @@ private:
 public:
   Artist(){};
   void line(long* start, long* end);
+  void origin();
 };
 
 #endif
