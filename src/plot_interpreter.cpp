@@ -1,29 +1,33 @@
-//plot_interpreter.ino
+//plot_interpreter.cpp
 
 #include "Arduino.h"
 #include "artist.h"
+#include <Shell.h>
 
 Artist artist;
-long pos1[2];
-long pos2[2];
+Shell shell;
 
-void setup() {
-  // initialize digital pin 13 as an output.
-  pinMode(13, OUTPUT);
+void cmd_line(Shell &shell, int argc, const ShellArguments &argv){
+  if(argc != 5){
+    return;
+  }
 
-  pos1[0] = 5;
-  pos1[1] = 5;
-
-  pos2[0] = 15;
-  pos2[1] = 15;
-
-  artist.line(pos1, pos2);
+  long start[] = {atol(argv[1]), atol(argv[2])};
+  long end[] = {atol(argv[3]), atol(argv[4])};
+  artist.line(start, end);
 }
 
-// the loop function runs over and over again forever
-void loop() {
-  digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);              // wait for a second
-  digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);              // wait for a second
+void setup(){
+  Serial.begin(9600);
+  shell.setPrompt("$");
+  shell.begin(Serial);
+
+  pinMode(3, OUTPUT);
+  digitalWrite(3, LOW);
+
+  ShellCommand(line, "draw a line", cmd_line);
+}
+
+void loop(){
+  shell.loop();
 }
