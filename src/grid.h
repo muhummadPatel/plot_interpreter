@@ -10,7 +10,7 @@
 #define X 0
 #define Y 1
 
-#define STEPS_PER_PIXEL 125
+#define STEPS_PER_PIXEL 50
 #define X_WIDTH_IN_STEPS 6500
 #define Y_WIDTH_IN_STEPS 6500
 
